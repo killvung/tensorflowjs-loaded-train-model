@@ -1,26 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
+import { initializeModel } from './train';
+import * as tf from '@tensorflow/tfjs';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
 
+// Initialize a model by training it or loaded the trained model from localStorage
+initializeModel().then((model) => {
+  console.log(model.predict(tf.tensor2d([10], [1, 1])));
+});
 export default App;
